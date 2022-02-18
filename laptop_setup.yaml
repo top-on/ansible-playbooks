@@ -1,0 +1,40 @@
+- name: "Setup local linux machine"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install vim
+      apt:
+        name: vim
+        state: present
+
+    - name: Install vscode
+      snap:
+        name: code
+        classic: yes
+
+    # install signal-desktop
+    - name: Download signing key for signal-desktop
+      get_url:
+        url: https://updates.signal.org/desktop/apt/keys.asc
+        dest: /tmp/keys.asc
+        checksum: sha256:2aca20b81a56ba0fbe24bdf58a45023e58a38392d885068afe596785ccd95491
+    - name: Import signing key
+      shell: |
+        cat /tmp/keys.asc | gpg --dearmor > /tmp/signal-desktop-keyring.gpg
+        cat /tmp/signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+    - name: Add repository into sources list
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main
+        state: present
+    - name: Install signal-desktop
+      apt:
+        name: signal-desktop
+        state: present
+        update_cache: yes
