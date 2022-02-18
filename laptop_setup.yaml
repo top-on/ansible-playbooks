@@ -19,6 +19,8 @@
           - thunderbird
           - firefox
           - torbrowser-launcher
+          - nextcloud-desktop
+          - keepassxc
         state: present
 
     - name: Install vscode
