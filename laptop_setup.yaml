@@ -9,9 +9,16 @@
         update_cache: yes
         cache_valid_time: 3600
 
-    - name: Install vim
+    - name: Install apt-packages
       apt:
-        name: vim
+        name:
+          - vim
+          - git
+          - docker.io
+          - docker-compose
+          - thunderbird
+          - firefox
+          - torbrowser-launcher
         state: present
 
     - name: Install vscode
@@ -30,7 +37,7 @@
         cat /tmp/keys.asc | gpg --dearmor > /tmp/signal-desktop-keyring.gpg
         cat /tmp/signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
     - name: Add repository into sources list
-      ansible.builtin.apt_repository:
+      apt_repository:
         repo: deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main
         state: present
         update_cache: yes
@@ -52,7 +59,7 @@
         dest: /usr/share/keyrings/element-io-archive-keyring.gpg
         checksum: sha256:fbf7823608964237024b043b607415b75d7c64221ac98ff5b5e67941f24684c2
     - name: Add repository into sources list
-      ansible.builtin.apt_repository:
+      apt_repository:
         repo: deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main
         state: present
         update_cache: yes
@@ -60,3 +67,6 @@
       apt:
         name: element-desktop
         state: present
+
+    # mullvad vpn
+    # TODO
