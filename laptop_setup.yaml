@@ -69,6 +69,3 @@
       apt:
         name: element-desktop
         state: present
-
-    # mullvad vpn
-    # TODO
