@@ -2,14 +2,14 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Update and upgrade apt packages
+    - name: apt - update and upgrade
       become: yes
       apt:
         upgrade: yes
         update_cache: yes
-        cache_valid_time: 3600
+        cache_valid_time: 3600  # caching time: 1 hour
 
-    - name: Install apt-packages
+    - name: apt - install utils
       apt:
         name:
           - vim
@@ -21,53 +21,54 @@
           - torbrowser-launcher
           - nextcloud-desktop
           - keepassxc
-        state: present
+        state: latest
 
-    - name: Install vscode
+    - name: vscode - install vscode
       snap:
         name: code
         classic: yes
 
     # install signal-desktop
-    - name: Download signing key for signal-desktop
+    - name: signal - download signing key
       get_url:
         url: https://updates.signal.org/desktop/apt/keys.asc
         dest: /tmp/keys.asc
         checksum: sha256:2aca20b81a56ba0fbe24bdf58a45023e58a38392d885068afe596785ccd95491
-    - name: Import signing key
+    - name: signal - import signing key
       shell: |
         cat /tmp/keys.asc | gpg --dearmor > /tmp/signal-desktop-keyring.gpg
         cat /tmp/signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-    - name: Add repository into sources list
+    - name: signal - add repository into sources list
       apt_repository:
         repo: deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main
         state: present
         update_cache: yes
-    - name: Install signal-desktop
+    - name: signal - install signal-desktop
       apt:
         name: signal-desktop
-        state: present
+        state: latest
 
     # install element-desktop
-    - name: Install element dependencies
+    - name: element - install dependencies
       apt:
         name:
           - wget
           - apt-transport-https
-        state: present
-    - name: Download signing key for Element
+        state: latest
+    - name: element - download signing key
       get_url:
         url: https://packages.element.io/debian/element-io-archive-keyring.gpg
         dest: /usr/share/keyrings/element-io-archive-keyring.gpg
         checksum: sha256:fbf7823608964237024b043b607415b75d7c64221ac98ff5b5e67941f24684c2
-    - name: Add repository into sources list
+    - name: element - add repository into sources list
       apt_repository:
         repo: deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main
         state: present
         update_cache: yes
-    - name: Install element-desktop
+    - name: element - install element-desktop
       apt:
         name: element-desktop
+        state: latest
 
     # install VPN
     - name: mullvad - download deb package
