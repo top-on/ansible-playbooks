@@ -68,4 +68,17 @@
     - name: Install element-desktop
       apt:
         name: element-desktop
-        state: present
+
+    # install VPN
+    - name: mullvad - download deb package
+      get_url:
+        url: https://mullvad.net/download/app/deb/latest
+        dest: /tmp/mullvad-latest.deb
+        checksum: sha256:87f73868f1fa1364f36d71913a92c9805f6e1d8723bca896e6ea48a1ba4933da
+      tags: 
+        - vpn
+    - name: mullvad - install with apt
+      apt:
+        deb: /tmp/mullvad-latest.deb
+      tags: 
+        - vpn
