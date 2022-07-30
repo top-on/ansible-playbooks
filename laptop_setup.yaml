@@ -23,11 +23,35 @@
           - keepassxc
         state: latest
 
-    # snap
-    - name: snap - install vscode
-      snap:
-        name: code
-        classic: yes
+    # flatpak
+    - name: flatpak - install dependencies
+      apt:
+        name:
+          - flatpak
+          - gnome-software-plugin-flatpak
+        state: latest
+      tags:
+        - flatpak
+    - name: flatpak - add flathub repository
+      shell: |
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      tags:
+        - flatpak
+    - name: flatpak - check installed flatpaks
+      shell: flatpak list
+      register: flatpak_list
+      tags: 
+        - flatpak
+    - name: flatpak - install keepass
+      shell: flatpak install -y flathub org.keepassxc.KeePassXC
+      when: flatpak_list.stdout.find("org.keepassxc.KeePassXC") == -1
+      tags:
+        - flatpak
+    - name: flatpak - install vscode
+      shell: flatpak install -y flathub com.visualstudio.code
+      when: flatpak_list.stdout.find("com.visualstudio.code") == -1
+      tags:
+        - flatpak
 
     # install signal-desktop
     - name: signal - download signing key
