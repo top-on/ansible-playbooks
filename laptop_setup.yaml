@@ -83,3 +83,10 @@
         deb: /tmp/mullvad-latest.deb
       tags: 
         - vpn
+    - name: mullvad - configure
+      shell: |
+        mullvad auto-connect set on
+        mullvad lan set allow
+        mullvad dns set default --block-ads --block-gambling --block-malware --block-trackers
+      tags:
+        - vpn
