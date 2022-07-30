@@ -17,11 +17,29 @@
           - docker.io
           - docker-compose
           - thunderbird
-          - firefox
           - torbrowser-launcher
           - nextcloud-desktop
           - keepassxc
         state: latest
+
+    # firefox
+    - name: firefox - install
+      apt:
+        name:
+          - firefox
+        state: latest
+      tags: firefox
+    - name: firefox - get profile folder
+      become: no
+      shell: cd /home/thor/.mozilla/firefox/*.default-release && pwd  # TODO: generalize user
+      register: firefox_profile_dir
+      tags: firefox
+    - name: firefox - configure
+      copy:
+        src: config/user.js
+        dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
+      tags: firefox
+
 
     # flatpak
     - name: flatpak - install dependencies
@@ -37,7 +55,7 @@
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
       tags:
         - flatpak
-    - name: flatpak - check installed flatpaks
+    - name: flatpak - get installed flatpaks
       shell: flatpak list
       register: flatpak_list
       tags: 
