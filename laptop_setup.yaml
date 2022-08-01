@@ -8,7 +8,7 @@
       apt:
         upgrade: yes
         update_cache: yes
-        cache_valid_time: 3600  # caching time: 1 hour
+        cache_valid_time: 3600 # caching time: 1 hour
     - name: apt - install utils
       apt:
         name:
@@ -31,7 +31,7 @@
       tags: firefox
     - name: firefox - get profile folder
       become: no
-      shell: cd /home/thor/.mozilla/firefox/*.default-release && pwd  # TODO: generalize user
+      shell: cd /home/thor/.mozilla/firefox/*.default-release && pwd # TODO: generalize user
       register: firefox_profile_dir
       tags: firefox
     - name: firefox - configure
@@ -39,7 +39,6 @@
         src: config/user.js
         dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
       tags: firefox
-
 
     # flatpak
     - name: flatpak - install dependencies
@@ -58,7 +57,7 @@
     - name: flatpak - get installed flatpaks
       shell: flatpak list
       register: flatpak_list
-      tags: 
+      tags:
         - flatpak
     - name: flatpak - install keepass
       shell: flatpak install -y flathub org.keepassxc.KeePassXC
@@ -119,12 +118,12 @@
         url: https://mullvad.net/download/app/deb/latest
         dest: /tmp/mullvad-latest.deb
         checksum: sha256:87f73868f1fa1364f36d71913a92c9805f6e1d8723bca896e6ea48a1ba4933da
-      tags: 
+      tags:
         - vpn
     - name: mullvad - install with apt
       apt:
         deb: /tmp/mullvad-latest.deb
-      tags: 
+      tags:
         - vpn
     - name: mullvad - configure
       shell: |
