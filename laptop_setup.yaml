@@ -132,7 +132,7 @@
       get_url:
         url: https://mullvad.net/download/app/deb/latest
         dest: /tmp/mullvad-latest.deb
-        checksum: sha256:0310551f9747a7520181e00c1149beeb180736e0c284db35fa43a29dbb1426ed
+        checksum: sha256:3b04ed5b39598c734548de7f5231496dcacf0aff7eb9c59810bda27588dea335
       tags:
         - vpn
     - name: mullvad - install with apt
