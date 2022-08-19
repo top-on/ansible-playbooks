@@ -40,6 +40,17 @@
         dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
       tags: firefox
 
+    # vscode (snap)
+    - name: snap - install snap
+      apt:
+        name:
+          - snapd
+        state: latest
+    - name: snap - install vscode
+      snap:
+        name: code
+        classic: yes
+
     # flatpak
     - name: flatpak - install dependencies
       apt:
@@ -62,11 +73,6 @@
     - name: flatpak - install keepass
       shell: flatpak install -y flathub org.keepassxc.KeePassXC
       when: flatpak_list.stdout.find("org.keepassxc.KeePassXC") == -1
-      tags:
-        - flatpak
-    - name: flatpak - install vscode
-      shell: flatpak install -y flathub com.visualstudio.code
-      when: flatpak_list.stdout.find("com.visualstudio.code") == -1
       tags:
         - flatpak
 
