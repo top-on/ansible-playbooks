@@ -46,10 +46,14 @@
         name:
           - snapd
         state: latest
+      tags:
+        - snap
     - name: snap - install vscode
       snap:
         name: code
         classic: yes
+      tags:
+        - snap
 
     # flatpak
     - name: flatpak - install dependencies
