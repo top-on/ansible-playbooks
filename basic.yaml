@@ -1,0 +1,59 @@
+- name: "Setup system basics."
+  hosts: localhost
+  connection: local
+  tasks:
+    # apt
+    - name: apt - update and upgrade
+      become: yes
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 3600 # caching time: 1 hour
+    - name: apt - install utils
+      apt:
+        name:
+          - vim
+          - git
+          - docker.io
+          - docker-compose
+          - thunderbird
+          - torbrowser-launcher
+        state: latest
+
+    # firefox
+    - name: firefox - install
+      apt:
+        name:
+          - firefox
+        state: latest
+    - name: firefox - get profile folder
+      become: no
+      shell: cd /home/thor/.mozilla/firefox/*.default-release && pwd # TODO: generalize user
+      register: firefox_profile_dir
+    - name: firefox - configure
+      copy:
+        src: config/user.js
+        dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
+
+    # flatpak
+    - name: flatpak - install dependencies
+      apt:
+        name:
+          - flatpak
+          - gnome-software-plugin-flatpak
+        state: latest
+    - name: flatpak - add flathub repository
+      shell: |
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    - name: flatpak - get installed flatpaks
+      shell: flatpak list
+      register: flatpak_list
+    - name: flatpak - install keepass
+      shell: flatpak install -y flathub org.keepassxc.KeePassXC
+      when: flatpak_list.stdout.find("org.keepassxc.KeePassXC") == -1
+    - name: flatpak - install vlc
+      shell: flatpak install -y flathub org.videolan.VLC
+      when: flatpak_list.stdout.find("org.videolan.VLC") == -1
+
+    - name: ubuntu dark theme
+      shell: gsettings set org.gnome.desktop.interface color-scheme prefer-dark

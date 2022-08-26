@@ -1,0 +1,26 @@
+- name: "Setup development tools."
+  hosts: localhost
+  connection: local
+  tasks:
+    # apt
+    - name: apt - update and upgrade
+      become: yes
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 3600 # caching time: 1 hour
+
+    # snap
+    - name: snap - install snap
+      apt:
+        name:
+          - snapd
+        state: latest
+    - name: snap - install vscode
+      snap:
+        name: code
+        classic: yes
+    - name: snap - install vscode insiders
+      snap:
+        name: code-insiders
+        classic: yes
