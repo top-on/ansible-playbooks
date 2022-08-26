@@ -40,7 +40,7 @@
         dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
       tags: firefox
 
-    # vscode (snap)
+    # snap
     - name: snap - install snap
       apt:
         name:
@@ -54,6 +54,13 @@
         classic: yes
       tags:
         - snap
+    - name: snap - install vscode insiders
+      snap:
+        name: code-insiders
+        classic: yes
+      tags:
+        - snap
+
 
     # flatpak
     - name: flatpak - install dependencies
