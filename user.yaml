@@ -1,0 +1,9 @@
+- name: "User settings (no sudo needed)."
+  hosts: localhost
+  connection: local
+  tasks:
+    # gnome settings
+    - name: gnome settings
+      shell: |
+        gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+        gsettings set org.gnome.desktop.interface enable-animations false

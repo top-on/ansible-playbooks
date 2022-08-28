@@ -54,9 +54,3 @@
     - name: flatpak - install vlc
       shell: flatpak install -y flathub org.videolan.VLC
       when: flatpak_list.stdout.find("org.videolan.VLC") == -1
-
-    # gnome settings
-    - name: ubuntu dark theme
-      shell: |
-        gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-        gsettings set org.gnome.desktop.interface enable-animations false
