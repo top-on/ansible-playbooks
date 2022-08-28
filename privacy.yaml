@@ -1,4 +1,4 @@
-- name: "Custom settings."
+- name: "Privacy settings."
   hosts: localhost
   connection: local
   tasks:
