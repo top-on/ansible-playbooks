@@ -1,7 +1,7 @@
-# ansible playbooks
+# Ansible Playbooks
 
-Playbooks for setting up Debian-based systems for different usecases.
-The current playbooks are tailores specifically to Ubuntu 22.04 systems.
+A collection of playbooks for setting up Debian-based systems for different usecases.
+The current playbooks are specifically tailored to `Ubuntu 22.04` systems.
 
 ## Requirements
 
