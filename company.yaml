@@ -1,0 +1,23 @@
+- name: "Setup company software."
+  hosts: localhost
+  connection: local
+  tasks:
+
+    # setup flatpak
+    - name: flatpak - install dependencies
+      apt:
+        name:
+          - flatpak
+          - gnome-software-plugin-flatpak
+        state: latest
+    - name: flatpak - add flathub repository
+      shell: |
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    # install flatpaks: slack
+    - name: flatpak - get installed flatpaks
+      shell: flatpak list
+      register: flatpak_list
+    - name: flatpak - install slack
+      shell: flatpak install -y flathub com.slack.Slack
+      when: flatpak_list.stdout.find("com.slack.Slack") == -1
