@@ -2,7 +2,7 @@
   hosts: localhost
   connection: local
   tasks:
-    # apt
+    # install apt utils
     - name: apt - update and upgrade
       become: yes
       apt:
@@ -20,6 +20,11 @@
           - torbrowser-launcher
         state: latest
 
+    # install sound-switcher
+    - name: snap - install indicator-sound-switcher
+      snap:
+        name: indicator-sound-switcher
+
     # install firefox
     - name: firefox - install
       apt:
@@ -27,7 +32,7 @@
           - firefox
         state: latest
 
-    # flatpak
+    # setup flatpak
     - name: flatpak - install dependencies
       apt:
         name:
@@ -37,6 +42,8 @@
     - name: flatpak - add flathub repository
       shell: |
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    # install flatpaks: keepass, vlc
     - name: flatpak - get installed flatpaks
       shell: flatpak list
       register: flatpak_list
