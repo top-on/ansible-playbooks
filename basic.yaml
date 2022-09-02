@@ -19,6 +19,7 @@
           - torbrowser-launcher
           - apt-transport-https
           - curl
+          - gnome-shell-extensions
         state: latest
 
     # install brave browser

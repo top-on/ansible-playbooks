@@ -21,3 +21,19 @@ Execute selected playbooks with the following command:
 ```bash
 $ sudo ansible-playbook <playbook_name_here>.yaml
 ```
+
+## Related tools
+
+### Howto install gTile
+
+gTile is a gnome-shell extension that improves window tiling capabilities of stock gnome-shell.
+
+Installation steps:
+
+1. Run playbook `basic.yaml`, which installs `gnome-shell-extensions`.
+
+2. In Firefox, install add-on `GNOME Shell integration`.
+
+3. Install the Gtile extention [here](https://extensions.gnome.org/extension/28/gtile/), by clicking the slider button at the web page's top-right.
+
+4. Run `gTile` with it's global keyboard shortcut `SUPER` + `ENTER`.
