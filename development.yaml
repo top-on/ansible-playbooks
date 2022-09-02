@@ -58,3 +58,8 @@
           - liblzma-dev
         state: latest
       become: yes
+
+    # install poetry
+    - name: poetry - install
+      shell: |
+        which poetry || curl -sSL https://install.python-poetry.org | python3 -
