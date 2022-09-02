@@ -19,7 +19,7 @@ $ sudo apt install ansible
 Execute selected playbooks with the following command:
 
 ```bash
-$ sudo ansible-playbook <playbook_name_here>.yaml
+$ ansible-playbook --ask-become-pass <playbook_name_here>.yaml
 ```
 
 ## Related tools

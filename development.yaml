@@ -4,11 +4,11 @@
   tasks:
     # apt
     - name: apt - update and upgrade
-      become: yes
       apt:
         upgrade: yes
         update_cache: yes
         cache_valid_time: 3600 # caching time: 1 hour
+      become: yes
 
     # snap
     - name: snap - install snap
@@ -16,11 +16,46 @@
         name:
           - snapd
         state: latest
+      become: yes
     - name: snap - install vscode
       snap:
         name: code
         classic: yes
+      become: yes
     - name: snap - install vscode insiders
       snap:
         name: code-insiders
         classic: yes
+      become: yes
+
+    # install pyenv (and python build dependencies)
+    - name: pyenv - install
+      shell: |
+        which pyenv || curl https://pyenv.run | bash
+        which pyenv || echo '# pyenv configuration' >> ~/.bashrc
+        which pyenv || echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+        which pyenv || echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+        which pyenv || echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+        which pyenv || source ~/.bashrc
+    - name: apt - install python build dependencies
+      apt:
+        name:
+          - make 
+          - build-essential
+          - libssl-dev
+          - zlib1g-dev
+          - libbz2-dev
+          - libreadline-dev
+          - libsqlite3-dev
+          - wget
+          - curl
+          - llvm
+          - libncursesw5-dev
+          - xz-utils
+          - tk-dev
+          - libxml2-dev
+          - libxmlsec1-dev
+          - libffi-dev
+          - liblzma-dev
+        state: latest
+      become: yes
