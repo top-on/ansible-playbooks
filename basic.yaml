@@ -20,20 +20,12 @@
           - torbrowser-launcher
         state: latest
 
-    # firefox
+    # install firefox
     - name: firefox - install
       apt:
         name:
           - firefox
         state: latest
-    - name: firefox - get profile folder
-      become: no
-      shell: cd /home/thor/.mozilla/firefox/*.default-release && pwd # TODO: generalize user
-      register: firefox_profile_dir
-    - name: firefox - configure
-      copy:
-        src: config/user.js
-        dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
 
     # flatpak
     - name: flatpak - install dependencies

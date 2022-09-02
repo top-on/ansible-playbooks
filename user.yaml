@@ -1,4 +1,4 @@
-- name: "User settings (no sudo needed)."
+- name: "User settings (do not run with sudo)."
   hosts: localhost
   connection: local
   tasks:
@@ -7,3 +7,13 @@
       shell: |
         gsettings set org.gnome.desktop.interface color-scheme prefer-dark
         gsettings set org.gnome.desktop.interface enable-animations false
+
+    # firefox: set config
+    - name: firefox - get profile folder
+      become: no
+      shell: cd ~/.mozilla/firefox/*.default-release && pwd
+      register: firefox_profile_dir
+    - name: firefox - configure
+      copy:
+        src: config/user.js
+        dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
