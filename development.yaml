@@ -9,6 +9,11 @@
         update_cache: yes
         cache_valid_time: 3600 # caching time: 1 hour
       become: yes
+    - name: apt - install dev tools
+      apt:
+        name:
+          - pipx
+        state: latest
 
     # snap
     - name: snap - install snap
