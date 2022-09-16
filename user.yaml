@@ -28,9 +28,9 @@
         name:
           - fish
         state: latest
-    - name: fish - append to .bashrc
-      shell: |
-        grep -qxF 'fish' ~/.bashrc || echo "fish" >> ~/.bashrc
+    # - name: fish - append to .bashrc
+    #   shell: |
+    #     grep -qxF 'fish' ~/.bashrc || echo "fish" >> ~/.bashrc
     - name: fish - create config folder
       file:
         path: ~/.config/fish
