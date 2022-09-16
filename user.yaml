@@ -10,10 +10,28 @@
 
     # firefox: set config
     - name: firefox - get profile folder
-      become: no
       shell: cd ~/.mozilla/firefox/*.default-release && pwd
       register: firefox_profile_dir
     - name: firefox - configure
       copy:
         src: config/user.js
         dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
+
+    # install fish shell
+    - name: fish - add ppa
+      apt_repository:
+        validate_certs: yes
+        repo: "ppa:fish-shell/release-3"
+        state: present
+    - name: fish - install
+      apt:
+        name:
+          - fish
+        state: latest
+    - name: fish - append to .bashrc
+      shell: |
+        grep -qxF 'fish' ~/.bashrc || echo "fish" >> ~/.bashrc
+    - name: fish - write config file
+      copy:
+        src: config/config.fish
+        dest: ~/.config/fish/config.fish

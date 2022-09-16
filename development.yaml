@@ -44,7 +44,7 @@
     - name: apt - install python build dependencies
       apt:
         name:
-          - make 
+          - make
           - build-essential
           - libssl-dev
           - zlib1g-dev
