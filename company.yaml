@@ -10,14 +10,18 @@
           - flatpak
           - gnome-software-plugin-flatpak
         state: latest
+      become: yes
     - name: flatpak - add flathub repository
       shell: |
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-    # install flatpaks: slack
+    # install flatpaks: slack, zoom
     - name: flatpak - get installed flatpaks
       shell: flatpak list
       register: flatpak_list
     - name: flatpak - install slack
       shell: flatpak install -y flathub com.slack.Slack
       when: flatpak_list.stdout.find("com.slack.Slack") == -1
+    - name: flatpak - install zoom
+      shell: flatpak install -y flathub us.zoom.Zoom
+      when: flatpak_list.stdout.find("us.zoom.Zoom") == -1
