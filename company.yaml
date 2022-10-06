@@ -28,3 +28,15 @@
     - name: flatpak - install JabRef
       shell: flatpak install -y flathub org.jabref.jabref
       when: flatpak_list.stdout.find("org.jabref.jabref") == -1
+
+    # install snap packages: miro
+    - name: snap - install snap
+      apt:
+        name:
+          - snapd
+        state: latest
+      become: yes
+    - name: snap - install miro
+      snap:
+        name: miro
+      become: yes
