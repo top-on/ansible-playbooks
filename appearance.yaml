@@ -1,4 +1,4 @@
-- name: "User settings (do not run with sudo)."
+- name: "Customize desktop appearance."
   hosts: localhost
   connection: local
   tasks:
