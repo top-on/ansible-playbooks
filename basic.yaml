@@ -24,6 +24,7 @@
           - curl
           - gnome-shell-extensions
           - gnome-tweaks
+          - vlc
         state: latest
       become: yes
 
