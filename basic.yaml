@@ -8,6 +8,7 @@
         upgrade: yes
         update_cache: yes
         cache_valid_time: 3600 # caching time: 1 hour
+      become: yes
     - name: apt - install utils
       apt:
         name:
@@ -24,25 +25,31 @@
           - gnome-shell-extensions
           - gnome-tweaks
         state: latest
+      become: yes
 
     # install brave browser
     - name: brave - download signing key
       shell: curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+      become: yes
     - name: brave - add ppa repository
       shell: echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+      become: yes
     - name: brave - apt update
       apt:
         update_cache: yes
+      become: yes
     - name: brave - install
       apt:
         name:
           - brave-browser
         state: latest
+      become: yes
 
     # install sound-switcher
     - name: snap - install indicator-sound-switcher
       snap:
         name: indicator-sound-switcher
+      become: yes
 
     # install firefox
     - name: firefox - install
@@ -50,6 +57,7 @@
         name:
           - firefox
         state: latest
+      become: yes
 
     # setup flatpak
     - name: flatpak - install dependencies
@@ -58,6 +66,7 @@
           - flatpak
           - gnome-software-plugin-flatpak
         state: latest
+      become: yes
     - name: flatpak - add flathub repository
       shell: |
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
