@@ -13,7 +13,9 @@
       apt:
         name:
           - pipx
+          - fish
         state: latest
+      become: yes
 
     # snap
     - name: snap - install snap
@@ -68,3 +70,13 @@
     - name: poetry - install
       shell: |
         which poetry || curl -sSL https://install.python-poetry.org | python3 -
+
+    # configure fish shell
+    - name: fish - create config folder
+      file:
+        path: ~/.config/fish
+        state: directory
+    - name: fish - write config file
+      copy:
+        src: config/config.fish
+        dest: ~/.config/fish/config.fish

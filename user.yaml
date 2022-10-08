@@ -7,35 +7,5 @@
       shell: |
         gsettings set org.gnome.desktop.interface color-scheme prefer-dark
         gsettings set org.gnome.desktop.interface enable-animations false
-
-    # firefox: set config
-    - name: firefox - get profile folder
-      shell: cd ~/.mozilla/firefox/*.default-release && pwd
-      register: firefox_profile_dir
-    - name: firefox - configure
-      copy:
-        src: config/user.js
-        dest: "{{ firefox_profile_dir.stdout_lines[0] }}/user.js"
-
-    # install fish shell
-    - name: apt - update
-      apt:
-        upgrade: no
-        update_cache: yes
-        cache_valid_time: 3600 # caching time: 1 hour
-    - name: fish - install
-      apt:
-        name:
-          - fish
-        state: latest
-    # - name: fish - append to .bashrc
-    #   shell: |
-    #     grep -qxF 'fish' ~/.bashrc || echo "fish" >> ~/.bashrc
-    - name: fish - create config folder
-      file:
-        path: ~/.config/fish
-        state: directory
-    - name: fish - write config file
-      copy:
-        src: config/config.fish
-        dest: ~/.config/fish/config.fish
+        gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
+        gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
