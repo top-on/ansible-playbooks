@@ -16,6 +16,7 @@
           - docker.io
           - docker-compose
           - htop
+          - nmap
           - thunderbird
           - torbrowser-launcher
           - apt-transport-https
