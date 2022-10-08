@@ -15,11 +15,13 @@
           - git
           - docker.io
           - docker-compose
+          - htop
           - thunderbird
           - torbrowser-launcher
           - apt-transport-https
           - curl
           - gnome-shell-extensions
+          - gnome-tweaks
         state: latest
 
     # install brave browser
