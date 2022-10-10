@@ -83,6 +83,10 @@
         dest: ~/.config/fish/config.fish
 
     # configure newsboat RSS reader
+    - name: newsboat - create config folder
+      file:
+        path: ~/.newsboat/
+        state: directory
     - name: newsboat - set urls
       copy:
         src: config/newsboat/urls
