@@ -87,3 +87,7 @@
       copy:
         src: config/newsboat/urls
         dest: ~/.newsboat/urls
+    - name: newsboat - set config
+      copy:
+        src: config/newsboat/config
+        dest: ~/.newsboat/config
