@@ -17,6 +17,7 @@
           - docker.io
           - docker-compose
           - htop
+          - net-tools
           - nmap
           - thunderbird
           - torbrowser-launcher
