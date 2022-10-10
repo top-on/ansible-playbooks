@@ -3,6 +3,14 @@
   connection: local
   tasks:
 
+    # install syncthings
+    - name: apt - install syncthing
+      apt:
+        name:
+          - syncthing
+        state: latest
+      become: yes
+
     # install signal-desktop
     - name: signal - download signing key
       get_url:
