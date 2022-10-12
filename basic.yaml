@@ -3,9 +3,9 @@
   connection: local
   tasks:
     # install apt utils
-    - name: apt - update and upgrade
+    - name: apt - update
       apt:
-        upgrade: yes
+        upgrade: no
         update_cache: yes
         cache_valid_time: 3600 # caching time: 1 hour
       become: yes
