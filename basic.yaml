@@ -73,15 +73,11 @@
       shell: |
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-    # install flatpaks: keepass, vlc
-    - name: flatpak - get installed flatpaks
-      shell: flatpak list
-      register: flatpak_list
-    - name: flatpak - install keepass
+    # install flatpaks
+    - name: flatpaks - install
       community.general.flatpak: 
-        name: org.keepassxc.KeePassXC
-        state: present
-    - name: flatpak - install vlc
-      community.general.flatpak: 
-        name: org.videolan.VLC
+        name: 
+          - org.keepassxc.KeePassXC
+          - org.videolan.VLC
+          - com.github.tchx84.Flatseal  # flatpak rights management
         state: present
