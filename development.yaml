@@ -100,5 +100,5 @@
     - name: cron - schedule git fetch
       ansible.builtin.cron:
         name: "schedule git fetch"
-        minute: "10"
+        minute: "*/5"
         job: ls ~/git/ | xargs -I{} git -C {} fetch -v
