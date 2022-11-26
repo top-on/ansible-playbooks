@@ -95,3 +95,10 @@
       copy:
         src: config/newsboat/config
         dest: ~/.newsboat/config
+
+    # schedule git fetch
+    - name: cron - schedule git fetch
+      ansible.builtin.cron:
+        name: "schedule git fetch"
+        minute: "10"
+        job: ls ~/git/ | xargs -I{} git -C {} fetch -v
