@@ -80,4 +80,5 @@
           - org.keepassxc.KeePassXC
           - org.videolan.VLC
           - com.github.tchx84.Flatseal  # flatpak rights management
+          - io.gitlab.librewolf-community
         state: present
