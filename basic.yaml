@@ -14,9 +14,11 @@
         name:
           - vim
           - git
+          - tig
           - docker.io
           - docker-compose
           - htop
+          - mc
           - net-tools
           - nmap
           - thunderbird
