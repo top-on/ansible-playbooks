@@ -112,3 +112,26 @@
         name: "schedule newsboat reload"
         minute: "*/15"
         job: newsboat --execute=reload --log-level=1 --log-file=~/tmp/newsboat.log
+
+    # install vscodium
+    - name: vscodium - add the GPG key of the repository
+      shell: |
+        wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+        | gpg --dearmor \
+        | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+    - name: vscodium - add ppa repository
+      shell: |
+        echo "deb [signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg arch=amd64] https://download.vscodium.com/debs vscodium main" \
+        | sudo tee /etc/apt/sources.list.d/vscodium.list
+      become: yes
+    - name: vscodium - apt update
+      apt:
+        upgrade: no
+        update_cache: yes
+      become: yes
+    - name: vscodium - apt install
+      apt:
+        name:
+          - codium
+        state: latest
+      become: yes
