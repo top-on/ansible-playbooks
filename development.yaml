@@ -13,8 +13,6 @@
       apt:
         name:
           - pipx
-          - fish
-          - newsboat  # RSS reader
         state: latest
       become: yes
 
@@ -73,6 +71,12 @@
         which poetry || curl -sSL https://install.python-poetry.org | python3 -
 
     # configure fish shell
+    - name: fish - install
+      apt:
+        name:
+          - fish
+        state: latest
+      become: yes
     - name: fish - create config folder
       file:
         path: ~/.config/fish
@@ -83,6 +87,12 @@
         dest: ~/.config/fish/config.fish
 
     # configure newsboat RSS reader
+    - name: newsboat - install
+      apt:
+        name:
+          - newsboat
+        state: latest
+      become: yes
     - name: newsboat - create config folder
       file:
         path: ~/.newsboat/
@@ -101,4 +111,27 @@
       ansible.builtin.cron:
         name: "schedule newsboat reload"
         minute: "*/15"
-        job: newsboat --execute=reload --log-level=1 --log-file=~/tmp/newsboat.log 
+        job: newsboat --execute=reload --log-level=1 --log-file=~/tmp/newsboat.log
+
+    # install vscodium
+    - name: vscodium - add the GPG key of the repository
+      shell: |
+        wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+        | gpg --dearmor \
+        | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+    - name: vscodium - add ppa repository
+      shell: |
+        echo "deb [signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg arch=amd64] https://download.vscodium.com/debs vscodium main" \
+        | sudo tee /etc/apt/sources.list.d/vscodium.list
+      become: yes
+    - name: vscodium - apt update
+      apt:
+        upgrade: no
+        update_cache: yes
+      become: yes
+    - name: vscodium - apt install
+      apt:
+        name:
+          - codium
+        state: latest
+      become: yes

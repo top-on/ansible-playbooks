@@ -77,11 +77,18 @@
 
     # install flatpaks
     - name: flatpaks - install
-      community.general.flatpak: 
-        name: 
+      community.general.flatpak:
+        name:
           - org.keepassxc.KeePassXC
           - org.videolan.VLC
-          - com.github.tchx84.Flatseal  # flatpak rights management
+          - com.github.tchx84.Flatseal # flatpak rights management
           - io.gitlab.librewolf-community
           - com.jgraph.drawio.desktop
         state: present
+
+    # cron-job to update flatpaks regularly
+    - name: flatpak - update on regularly
+      ansible.builtin.cron:
+        name: "update flatpaks regularly"
+        minute: "*/20"
+        job: flatpak update -y

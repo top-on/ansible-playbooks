@@ -2,7 +2,6 @@
   hosts: localhost
   connection: local
   tasks:
-
     # install syncthings
     - name: apt - install syncthing
       apt:
@@ -21,15 +20,18 @@
       shell: |
         cat /tmp/keys.asc | gpg --dearmor > /tmp/signal-desktop-keyring.gpg
         cat /tmp/signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+      become: yes
     - name: signal - add repository into sources list
       apt_repository:
         repo: deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main
         state: present
         update_cache: yes
+      become: yes
     - name: signal - install signal-desktop
       apt:
         name: signal-desktop
         state: latest
+      become: yes
 
     # install element-desktop
     - name: element - install dependencies
@@ -38,6 +40,7 @@
           - wget
           - apt-transport-https
         state: latest
+      become: yes
     - name: element - download signing key
       get_url:
         url: https://packages.element.io/debian/element-io-archive-keyring.gpg
@@ -48,20 +51,23 @@
         repo: deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main
         state: present
         update_cache: yes
+      become: yes
     - name: element - install element-desktop
       apt:
         name: element-desktop
         state: latest
+      become: yes
 
     # install VPN
     - name: mullvad - download deb package
       get_url:
         url: https://mullvad.net/download/app/deb/latest
         dest: /tmp/mullvad-latest.deb
-        checksum: sha256:3b04ed5b39598c734548de7f5231496dcacf0aff7eb9c59810bda27588dea335
+        checksum: sha256:ddebc807c216d1b8a846ab6901d0914210f2c2ef313cc375a3186a40620100d6
     - name: mullvad - install with apt
       apt:
         deb: /tmp/mullvad-latest.deb
+      become: yes
     - name: mullvad - configure
       shell: |
         mullvad auto-connect set on
