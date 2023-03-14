@@ -27,7 +27,7 @@
           - curl
           - gnome-shell-extensions
           - gnome-tweaks
-          - vlc
+          - gimp
         state: latest
       become: yes
 
@@ -83,4 +83,5 @@
           - org.videolan.VLC
           - com.github.tchx84.Flatseal  # flatpak rights management
           - io.gitlab.librewolf-community
+          - com.jgraph.drawio.desktop
         state: present
