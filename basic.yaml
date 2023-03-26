@@ -25,11 +25,6 @@
           # desktop apps
           - thunderbird
           - gimp
-          # gnome
-          # OPTIONAL: move to appearance.yaml
-          - gnome-shell-extensions
-          - gnome-tweaks
-          - gnome-shell-extension-appindicator
         state: latest
       become: yes
 

@@ -2,6 +2,22 @@
   hosts: localhost
   connection: local
   tasks:
+    # install gnome tools
+    - name: apt - update
+      apt:
+        upgrade: no
+        update_cache: yes
+        cache_valid_time: 3600 # caching time: 1 hour
+      become: yes
+    - name: apt - install gnome tools
+      apt:
+        name:
+          - gnome-shell-extensions
+          - gnome-tweaks
+          - gnome-shell-extension-appindicator
+        state: latest
+      become: yes
+
     # gnome settings
     - name: gnome settings
       shell: |
