@@ -37,9 +37,10 @@
         state: latest
       become: yes
     - name: flatpak - add flathub repository
-      # OPTIONAL: add repo with flatpak command
-      shell: |
-        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
     # install flatpaks
     - name: flatpaks - install
