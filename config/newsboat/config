@@ -1,1 +1,1 @@
-browser "firefox %u"
+browser "flatpak run io.gitlab.librewolf-community %u"
