@@ -26,6 +26,7 @@
           - deja-dup
           - thunderbird
           - gimp
+          - calibre
         state: latest
       become: yes
 
@@ -58,7 +59,7 @@
           - com.microsoft.Edge
         state: present
 
-    # configure newsboat RSS reader
+    # install and configure newsboat RSS reader
     - name: newsboat - install
       apt:
         name:
