@@ -55,6 +55,7 @@
           - im.riot.Riot
           - org.signal.Signal
           - com.brave.Browser
+          - com.microsoft.Edge
         state: present
 
     # configure newsboat RSS reader
