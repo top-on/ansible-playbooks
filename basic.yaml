@@ -2,7 +2,7 @@
   hosts: localhost
   connection: local
   tasks:
-    # install apt utils
+    # install apt packages
     - name: apt - update
       apt:
         upgrade: no
@@ -12,54 +12,29 @@
     - name: apt - install utils
       apt:
         name:
+          # terminal
           - vim
-          - git
+          - tmux
           - tig
-          - docker.io
-          - docker-compose
+          - curl
           - htop
           - mc
+          # networking
           - net-tools
           - nmap
+          # desktop apps
           - thunderbird
-          - torbrowser-launcher
-          - apt-transport-https
-          - curl
+          - gimp
+          # gnome
+          # OPTIONAL: move to appearance.yaml
           - gnome-shell-extensions
           - gnome-tweaks
-          - gimp
-        state: latest
-      become: yes
-
-    # install brave browser
-    - name: brave - download signing key
-      shell: curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-      become: yes
-    - name: brave - add ppa repository
-      shell: echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-      become: yes
-    - name: brave - apt update
-      apt:
-        update_cache: yes
-      become: yes
-    - name: brave - install
-      apt:
-        name:
-          - brave-browser
-        state: latest
-      become: yes
-
-    # install sound-switcher
-    - name: snap - install indicator-sound-switcher
-      snap:
-        name: indicator-sound-switcher
-      become: yes
-
-    # install firefox
-    - name: firefox - install
-      apt:
-        name:
-          - firefox
+          - gnome-shell-extension-appindicator
+          # development
+          # OPTIONAL: move to development.yaml
+          - git
+          - docker.io
+          - docker-compose
         state: latest
       become: yes
 
@@ -72,6 +47,7 @@
         state: latest
       become: yes
     - name: flatpak - add flathub repository
+      # OPTIONAL: add repo with flatpak command
       shell: |
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -84,11 +60,7 @@
           - com.github.tchx84.Flatseal # flatpak rights management
           - io.gitlab.librewolf-community
           - com.jgraph.drawio.desktop
+          - im.riot.Riot
+          - org.signal.Signal
+          - com.brave.Browser
         state: present
-
-    # cron-job to update flatpaks regularly
-    - name: flatpak - update on regularly
-      ansible.builtin.cron:
-        name: "update flatpaks regularly"
-        minute: "*/20"
-        job: flatpak update -y
