@@ -1,13 +1,22 @@
 # Ansible Playbooks
 
-A collection of playbooks for setting up Debian-based systems for different usecases.
-The current playbooks are specifically tailored to `Ubuntu 22.04` systems.
+A collection of playbooks for setting up Debian-based systems.
 
 ## Requirements
 
 The `ansible-playbook` tool is needed.
 
-On Ubuntu 22.04 this can be installed from the `anbible PPA`, which might need to be added:
+### Debian 12
+
+On Debian, install with `apt`:
+
+```bash
+$ sudo apt install ansible
+```
+
+### Ubuntu 22.04
+
+`ansible-playbook` can be installed from the `anbible PPA`:
 
 ```bash
 $ sudo add-apt-repository --update ppa:ansible/ansible
