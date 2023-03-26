@@ -1,4 +1,4 @@
-- name: "Customize desktop appearance."
+- name: "Customize GNOME appearance."
   hosts: localhost
   connection: local
   tasks:
