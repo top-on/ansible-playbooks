@@ -71,33 +71,6 @@
         src: config/config.fish
         dest: ~/.config/fish/config.fish
 
-    # configure newsboat RSS reader
-    - name: newsboat - install
-      apt:
-        name:
-          - newsboat
-        state: latest
-      become: yes
-    - name: newsboat - create config folder
-      file:
-        path: ~/.newsboat/
-        state: directory
-    - name: newsboat - set urls
-      copy:
-        src: config/newsboat/urls
-        dest: ~/.newsboat/urls
-    - name: newsboat - set config
-      copy:
-        src: config/newsboat/config
-        dest: ~/.newsboat/config
-
-    # schedule git fetch
-    - name: cron - schedule newsboard reload
-      ansible.builtin.cron:
-        name: "schedule newsboat reload"
-        minute: "*/15"
-        job: newsboat --execute=reload --log-level=1 --log-file=~/tmp/newsboat.log
-
     # install vscodium
     - name: vscodium - add the GPG key of the repository
       shell: |
