@@ -23,6 +23,7 @@
           - net-tools
           - nmap
           # desktop apps
+          - deja-dup
           - thunderbird
           - gimp
         state: latest
