@@ -9,7 +9,7 @@
         update_cache: yes
         cache_valid_time: 3600 # caching time: 1 hour
       become: yes
-    - name: apt - install utils
+    - name: apt - install basic apps
       apt:
         name:
           # terminal
@@ -30,11 +30,6 @@
           - gnome-shell-extensions
           - gnome-tweaks
           - gnome-shell-extension-appindicator
-          # development
-          # OPTIONAL: move to development.yaml
-          - git
-          - docker.io
-          - docker-compose
         state: latest
       become: yes
 

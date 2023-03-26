@@ -12,7 +12,10 @@
     - name: apt - install dev tools
       apt:
         name:
+          - git
           - pipx
+          - docker.io
+          - docker-compose
         state: latest
       become: yes
 
