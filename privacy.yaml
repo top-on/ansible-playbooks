@@ -10,54 +10,6 @@
         state: latest
       become: yes
 
-    # install signal-desktop
-    - name: signal - download signing key
-      get_url:
-        url: https://updates.signal.org/desktop/apt/keys.asc
-        dest: /tmp/keys.asc
-        checksum: sha256:2aca20b81a56ba0fbe24bdf58a45023e58a38392d885068afe596785ccd95491
-    - name: signal - import signing key
-      shell: |
-        cat /tmp/keys.asc | gpg --dearmor > /tmp/signal-desktop-keyring.gpg
-        cat /tmp/signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-      become: yes
-    - name: signal - add repository into sources list
-      apt_repository:
-        repo: deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main
-        state: present
-        update_cache: yes
-      become: yes
-    - name: signal - install signal-desktop
-      apt:
-        name: signal-desktop
-        state: latest
-      become: yes
-
-    # install element-desktop
-    - name: element - install dependencies
-      apt:
-        name:
-          - wget
-          - apt-transport-https
-        state: latest
-      become: yes
-    - name: element - download signing key
-      get_url:
-        url: https://packages.element.io/debian/element-io-archive-keyring.gpg
-        dest: /usr/share/keyrings/element-io-archive-keyring.gpg
-        checksum: sha256:fbf7823608964237024b043b607415b75d7c64221ac98ff5b5e67941f24684c2
-    - name: element - add repository into sources list
-      apt_repository:
-        repo: deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main
-        state: present
-        update_cache: yes
-      become: yes
-    - name: element - install element-desktop
-      apt:
-        name: element-desktop
-        state: latest
-      become: yes
-
     # install VPN
     - name: mullvad - download deb package
       get_url:

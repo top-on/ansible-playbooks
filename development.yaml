@@ -16,24 +16,6 @@
         state: latest
       become: yes
 
-    # snap
-    - name: snap - install snap
-      apt:
-        name:
-          - snapd
-        state: latest
-      become: yes
-    - name: snap - install vscode
-      snap:
-        name: code
-        classic: yes
-      become: yes
-    - name: snap - install vscode insiders
-      snap:
-        name: code-insiders
-        classic: yes
-      become: yes
-
     # install pyenv (and python build dependencies)
     - name: pyenv - install
       shell: |
