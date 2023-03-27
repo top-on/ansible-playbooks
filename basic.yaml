@@ -4,12 +4,13 @@
   tasks:
     # install apt packages
     - name: apt - update
+      become: yes
       apt:
         upgrade: no
         update_cache: yes
         cache_valid_time: 3600 # caching time: 1 hour
-      become: yes
     - name: apt - install basic apps
+      become: yes
       apt:
         name:
           # terminal
@@ -29,16 +30,15 @@
           - gimp
           - calibre
         state: latest
-      become: yes
 
     # setup flatpak
     - name: flatpak - install dependencies
+      become: yes
       apt:
         name:
           - flatpak
           - gnome-software-plugin-flatpak
         state: latest
-      become: yes
     - name: flatpak - add flathub repository
       community.general.flatpak_remote:
         name: flathub
@@ -54,7 +54,6 @@
           - com.github.tchx84.Flatseal # flatpak rights management
           - io.gitlab.librewolf-community
           - com.jgraph.drawio.desktop
-          - im.riot.Riot
           - org.signal.Signal
           - com.brave.Browser
           - com.microsoft.Edge
@@ -62,11 +61,11 @@
 
     # install and configure newsboat RSS reader
     - name: newsboat - install
+      become: yes
       apt:
         name:
           - newsboat
         state: latest
-      become: yes
     - name: newsboat - create config folder
       file:
         path: ~/.newsboat/
@@ -86,3 +85,30 @@
         name: "schedule newsboat reload"
         minute: "*/15"
         job: newsboat --execute=reload --log-level=1 --log-file=~/tmp/newsboat.log
+
+    # install element
+    - name: element - install dependencies
+      apt:
+        name:
+          - wget
+          - apt-transport-https
+        state: present
+    - name: element - add element repository key
+      become: yes
+      apt_key:
+        # TODO: add key id
+        url: https://packages.element.io/debian/element-io-archive-keyring.gpg
+        keyring: /usr/share/keyrings/element-io-archive-keyring.gpg
+        state: present
+    - name: element - add element repository
+      become: yes
+      apt_repository:
+        repo: 'deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main'
+        state: present
+        filename: 'element-io'
+    - name: element - install element desktop
+      become: yes
+      apt:
+        name: element-desktop
+        state: present
+        update_cache: yes
