@@ -19,6 +19,7 @@
           - curl
           - htop
           - mc
+          - moc
           # networking
           - net-tools
           - nmap
