@@ -29,6 +29,7 @@
           - thunderbird
           - gimp
           - calibre
+          - vlc
         state: latest
 
     # setup flatpak
@@ -50,7 +51,6 @@
       community.general.flatpak:
         name:
           - org.keepassxc.KeePassXC
-          - org.videolan.VLC
           - com.github.tchx84.Flatseal # flatpak rights management
           - io.gitlab.librewolf-community
           - com.jgraph.drawio.desktop
