@@ -57,6 +57,7 @@
           - org.signal.Signal
           - com.brave.Browser
           - com.microsoft.Edge
+          - hu.irl.cameractrls # webcam settings
         state: present
 
     # install and configure newsboat RSS reader
@@ -88,6 +89,7 @@
 
     # install element
     - name: element - install dependencies
+      become: yes
       apt:
         name:
           - wget
