@@ -58,6 +58,7 @@
           - com.brave.Browser
           - com.microsoft.Edge
           - hu.irl.cameractrls # webcam settings
+          - com.transmissionbt.Transmission
         state: present
 
     # install and configure newsboat RSS reader
