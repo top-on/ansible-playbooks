@@ -14,7 +14,7 @@ On Debian, install with `apt`:
 $ sudo apt install ansible
 ```
 
-### Ubuntu 22.04
+### Ubuntu / pop!_OS 22.04
 
 `ansible-playbook` can be installed from the `anbible PPA`:
 
