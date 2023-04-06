@@ -113,5 +113,17 @@
       become: yes
       apt:
         name: element-desktop
-        state: present
+        state: latest
         update_cache: yes
+
+    # install indicator-sound-switcher
+    - name: indicator-sound-switcher - add PPA
+      become: yes
+      apt_repository:
+        repo: 'ppa:yktooo/ppa'
+        state: present
+    - name: indicator-sound-switcher - install
+      become: yes
+      apt:
+        name: indicator-sound-switcher
+        state: latest
