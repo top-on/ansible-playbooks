@@ -72,32 +72,11 @@
         dest: ~/.config/fish/config.fish
 
     # install vscode
-    - name: Install wget and gnupg packages
-      apt:
-        name: [wget, gnupg]
-        state: present
-    - name: vscode - download Microsoft GPG key
-      shell: wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-      args:
-        chdir: /tmp
-        creates: /tmp/packages.microsoft.gpg
-    - name: vscode - Install Microsoft GPG key
+    - name: vscode - install snap
       become: yes
-      copy:
-        src: /tmp/packages.microsoft.gpg
-        dest: /etc/apt/keyrings/packages.microsoft.gpg
-    - name: vscode - add vscode repository
-      become: yes
-      shell: |
-        echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] \
-        https://packages.microsoft.com/repos/code stable main" \
-        > /etc/apt/sources.list.d/vscode.list
-    - name: vscode - apt install
-      become: yes
-      apt:
-        name:
-          - code
-        state: latest
+      snap:
+        name: code
+        classic: yes
 
     # install vscodium
     - name: vscodium - add the GPG key of the repository
