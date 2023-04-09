@@ -72,7 +72,13 @@
         dest: ~/.config/fish/config.fish
 
     # install vscode
-    - name: vscode - install snap
+    - name: vscode - install snapd
+      become: yes
+      apt:
+        name:
+          - snapd
+        state: latest
+    - name: vscode - install with snap
       become: yes
       snap:
         name: code
