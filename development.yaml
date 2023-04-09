@@ -5,7 +5,7 @@
     # apt
     - name: apt - update
       apt:
-        upgrade: no
+        upgrade: yes
         update_cache: yes
         cache_valid_time: 3600 # caching time: 1 hour
       become: yes
