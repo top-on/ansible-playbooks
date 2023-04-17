@@ -59,6 +59,7 @@
           - com.microsoft.Edge
           - hu.irl.cameractrls # webcam settings
           - com.transmissionbt.Transmission
+          - com.spotify.Client
         state: present
 
     # install and configure newsboat RSS reader
