@@ -1,0 +1,24 @@
+- name: "Setup company software."
+  hosts: localhost
+  connection: local
+  tasks:
+    # setup flatpak
+    - name: flatpak - install dependencies
+      become: yes
+      apt:
+        name:
+          - flatpak
+          - gnome-software-plugin-flatpak
+        state: latest
+    - name: flatpak - add flathub repository
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+    # install flatpaks
+    - name: flatpaks - install
+      community.general.flatpak:
+        name:
+          - us.zoom.Zoom
+          - com.slack.Slack
