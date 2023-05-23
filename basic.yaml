@@ -24,6 +24,7 @@
           # networking
           - net-tools
           - nmap
+          - syncthing
           # desktop apps
           - deja-dup
           - thunderbird

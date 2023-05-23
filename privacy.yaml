@@ -2,14 +2,6 @@
   hosts: localhost
   connection: local
   tasks:
-    # install syncthings
-    - name: apt - install syncthing
-      apt:
-        name:
-          - syncthing
-        state: latest
-      become: yes
-
     # install VPN
     - name: mullvad - download deb package
       get_url:
