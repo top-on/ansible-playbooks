@@ -22,3 +22,15 @@
         name:
           - us.zoom.Zoom
           - com.slack.Slack
+
+    # chrome
+    - name: chrome - add repository
+      become: yes
+      apt_repository:
+        repo: "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main"
+        state: present
+    - name: Install Google Chrome
+      become: yes
+      apt:
+        name: google-chrome-stable
+        state: present
