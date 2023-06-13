@@ -9,7 +9,7 @@
         name:
           - flatpak
           - gnome-software-plugin-flatpak
-        state: latest
+        state: present
     - name: flatpak - add flathub repository
       community.general.flatpak_remote:
         name: flathub
