@@ -31,6 +31,7 @@
           - gimp
           - calibre
           - vlc
+          - gnome-shell-pomodoro
         state: latest
 
     # setup flatpak
