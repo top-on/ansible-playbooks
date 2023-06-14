@@ -22,6 +22,7 @@
         name:
           - us.zoom.Zoom
           - com.slack.Slack
+          - io.dbeaver.DBeaverCommunity
 
     # chrome
     - name: chrome - add repository
