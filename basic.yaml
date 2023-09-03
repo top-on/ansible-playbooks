@@ -109,9 +109,9 @@
     - name: element - add element repository
       become: yes
       apt_repository:
-        repo: 'deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main'
+        repo: "deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main"
         state: present
-        filename: 'element-io'
+        filename: "element-io"
     - name: element - install element desktop
       become: yes
       apt:
