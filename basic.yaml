@@ -140,7 +140,6 @@
       become: yes
       apt_repository:
         repo: deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable
-        state: present
     - name: syncthing - install element desktop
       become: yes
       apt:
