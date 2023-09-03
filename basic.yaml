@@ -101,10 +101,9 @@
     - name: element - add element repository key
       become: yes
       apt_key:
-        # TODO: add key id
+        id: 12D4CD600C2240A9F4A82071D7B0B66941D01538
         url: https://packages.element.io/debian/element-io-archive-keyring.gpg
         keyring: /usr/share/keyrings/element-io-archive-keyring.gpg
-        state: present
     - name: element - add element repository
       become: yes
       apt_repository:
