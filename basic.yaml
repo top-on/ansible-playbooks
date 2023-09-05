@@ -67,21 +67,16 @@
     - name: newsboat - install
       become: yes
       apt:
-        name:
-          - newsboat
-        state: latest
+        name: newsboat
+        state: present
     - name: newsboat - create config folder
       file:
         path: ~/.newsboat/
         state: directory
-    - name: newsboat - set urls
+    - name: newsboat - copy config files
       copy:
-        src: config/newsboat/urls
-        dest: ~/.newsboat/urls
-    - name: newsboat - set config
-      copy:
-        src: config/newsboat/config
-        dest: ~/.newsboat/config
+        src: config/newsboat/
+        dest: ~/.newsboat/
 
     # schedule newsboat reload
     - name: cron - schedule newsboard reload
