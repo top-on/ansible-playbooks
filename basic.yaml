@@ -97,7 +97,6 @@
       apt:
         name: element-desktop
         state: present
-        update_cache: yes
 
     # install indicator-sound-switcher
     - name: indicator-sound-switcher - add PPA
