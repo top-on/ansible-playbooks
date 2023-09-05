@@ -2,13 +2,6 @@
   hosts: localhost
   connection: local
   tasks:
-    # install apt packages
-    - name: apt - update
-      become: yes
-      apt:
-        upgrade: no
-        update_cache: yes
-        cache_valid_time: 3600 # caching time: 1 hour
     - name: apt - install basic apps
       become: yes
       apt:
@@ -31,7 +24,7 @@
           - calibre
           - vlc
           - gnome-shell-pomodoro
-        state: latest
+        state: present
 
     # setup flatpak
     - name: flatpak - install dependencies
@@ -40,7 +33,7 @@
         name:
           - flatpak
           - gnome-software-plugin-flatpak
-        state: latest
+        state: present
     - name: flatpak - add flathub repository
       community.general.flatpak_remote:
         name: flathub
@@ -109,7 +102,7 @@
       become: yes
       apt:
         name: element-desktop
-        state: latest
+        state: present
         update_cache: yes
 
     # install indicator-sound-switcher
@@ -122,7 +115,7 @@
       become: yes
       apt:
         name: indicator-sound-switcher
-        state: latest
+        state: present
 
     # install syncthing from PPA
     - name: syncthing - import release key
@@ -139,4 +132,4 @@
       become: yes
       apt:
         name: syncthing
-        state: latest
+        state: present
