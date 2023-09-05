@@ -2,13 +2,7 @@
   hosts: localhost
   connection: local
   tasks:
-    # apt
-    - name: apt - update
-      become: yes
-      apt:
-        upgrade: yes
-        update_cache: yes
-        cache_valid_time: 3600  # caching time: 1 hour
+    # apt tools
     - name: apt - install dev tools
       become: yes
       apt:
@@ -17,7 +11,6 @@
           - pipx
           - docker.io
           - docker-compose
-        state: latest
 
     # install pyenv (and python build dependencies)
     # OPTIONAL: use blockinfile module
@@ -49,7 +42,6 @@
           - libxmlsec1-dev
           - libffi-dev
           - liblzma-dev
-        state: latest
 
     # install poetry
     # OPTIONAL: try installing with pipx instead
@@ -62,7 +54,6 @@
       become: yes
       apt:
         name: fish
-        state: latest
     - name: fish - create config folder
       file:
         path: ~/.config/fish
@@ -77,7 +68,6 @@
       become: yes
       apt:
         name: snapd
-        state: latest
     - name: vscode - install with snap
       become: yes
       snap:
