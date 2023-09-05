@@ -62,10 +62,6 @@
       apt:
         name: newsboat
         state: present
-    - name: newsboat - create config folder
-      file:
-        path: ~/.newsboat/
-        state: directory
     - name: newsboat - copy config files
       copy:
         src: config/newsboat/
