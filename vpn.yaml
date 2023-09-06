@@ -1,4 +1,4 @@
-- name: "Privacy settings."
+- name: "Setting up a VPN client."
   hosts: localhost
   connection: local
   tasks:
