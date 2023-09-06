@@ -11,20 +11,6 @@
         state: present
       become: yes
 
-    # gnome settings
-    - name: dconf - 24h clock
-      community.general.dconf:
-        key: "/org/gnome/desktop/interface/clock-format"
-        value: "'24h'"
-    - name: dconf - disable animations
-      community.general.dconf:
-        key: "/org/gnome/desktop/interface/enable-animations"
-        value: "false"
-    - name: dconf - only apps from current workspace in app-switcher
-      community.general.dconf:
-        key: "/org/gnome/shell/app-switcher/current-workspace-only"
-        value: "true"
-
     # keyboard shortcuts
     - name: dconf - launch and switch between dash items using Super+(0-9)
       community.general.dconf:
@@ -51,7 +37,15 @@
         key: "/org/gnome/dektop/wm/keybindings/switch-windows-backward"
         value: "['<Shift><Alt>Tab']"
 
-    # color theme
+    # appearance
+    - name: dconf - disable animations
+      community.general.dconf:
+        key: "/org/gnome/desktop/interface/enable-animations"
+        value: "false"
+    - name: dconf - no title bars
+      community.general.dconf:
+        key: "/org/gnome/shell/extensions/pop-shell/show-title"
+        value: "false"
     - name: dconf - color scheme perfer-dark
       community.general.dconf:
         key: "/org/gnome/desktop/interface/color-scheme"
@@ -66,6 +60,10 @@
         value: "'#000000'"
 
     # localization settings
+    - name: dconf - 24h clock
+      community.general.dconf:
+        key: "/org/gnome/desktop/interface/clock-format"
+        value: "'24h'"
     - name: dconf - keyboard layout
       community.general.dconf:
         key: "/org/gnome/desktop/input-sources/sources"
