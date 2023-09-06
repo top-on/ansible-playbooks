@@ -28,7 +28,29 @@
       community.general.dconf:
         key: "/org/gnome/shell/app-switcher/current-workspace-only"
         value: "true"
-    - name: dconf- launch and switch between dash items using Super+(0-9)
+
+    # keyboard shortcuts
+    - name: dconf - launch and switch between dash items using Super+(0-9)
       community.general.dconf:
         key: "/org/gnome/shell/extensions/dash-to-dock/hot-keys"
         value: "true"
+    - name: dconf - play/pause
+      community.general.dconf:
+        key: "/org/gnome/settings-daemon/plugins/media-keys/play"
+        value: "['<Super>F1']"
+    - name: dconf - previous track
+      community.general.dconf:
+        key: "/org/gnome/settings-daemon/plugins/media-keys/previous"
+        value: "['<Super>F2']"
+    - name: dconf - next track
+      community.general.dconf:
+        key: "/org/gnome/settings-daemon/plugins/media-keys/next"
+        value: "['<Super>F3']"
+    - name: dconf - switch windows
+      community.general.dconf:
+        key: "/org/gnome/dektop/wm/keybindings/switch-windows"
+        value: "['<Alt>Tab']"
+    - name: dconf - switch windows backward
+      community.general.dconf:
+        key: "/org/gnome/dektop/wm/keybindings/switch-windows-backward"
+        value: "['<Shift><Alt>Tab']"
