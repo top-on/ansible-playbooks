@@ -15,13 +15,22 @@
 
     # install pyenv (and python build dependencies)
     # OPTIONAL: use blockinfile module
+    - name: pyenv - check if installed
+      command: which pyenv
+      register: which_pyenv
+      failed_when: false  # do not fail if does not exist
+      changed_when: false  # do not report as change
     - name: pyenv - install
-      shell: |
-        which pyenv || curl https://pyenv.run | bash
-        grep -qxF 'eval "$(pyenv init -)"' ~/.bashrc || echo '# pyenv configuration' >> ~/.bashrc
-        grep -qxF 'eval "$(pyenv init -)"' ~/.bashrc || echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-        grep -qxF 'eval "$(pyenv init -)"' ~/.bashrc || echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-        grep -qxF 'eval "$(pyenv init -)"' ~/.bashrc || echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+      shell: curl https://pyenv.run | bash
+      when: which_pyenv.rc != 0  # run only if return code is not 0
+    - name: pyenv - settings in .bashrc
+      blockinfile: 
+        path: ~/.bashrc
+        block: |
+          # pyenv configuration
+          export PYENV_ROOT="$HOME/.pyenv"
+          command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+          eval "$(pyenv init -)"
     - name: apt - install python build dependencies
       become: yes
       apt:
