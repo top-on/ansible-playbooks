@@ -11,6 +11,7 @@
           - pipx
           - docker.io
           - docker-compose
+          - snapd  # used to install vscode
 
     # install pyenv (and python build dependencies)
     # OPTIONAL: use blockinfile module
@@ -60,10 +61,6 @@
         dest: ~/.config/fish/
 
     # install vscode
-    - name: vscode - install snapd
-      become: yes
-      apt:
-        name: snapd
     - name: vscode - install with snap
       become: yes
       snap:
