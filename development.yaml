@@ -54,14 +54,10 @@
       become: yes
       apt:
         name: fish
-    - name: fish - create config folder
-      file:
-        path: ~/.config/fish
-        state: directory
-    - name: fish - write config file
+    - name: fish - copy config file
       copy:
-        src: config/config.fish
-        dest: ~/.config/fish/config.fish
+        src: config/fish/
+        dest: ~/.config/fish/
 
     # install vscode
     - name: vscode - install snapd
