@@ -126,3 +126,19 @@
       apt:
         name: syncthing
         state: present
+
+    # setup radicale for decsync
+    - name: radicale - install radicale
+      become: yes
+      apt:
+        name: radicale
+        state: present
+    - name: radicale - install decsync plugin
+      pip:
+        name: radicale_storage_decsync
+        state: present
+    - name: radicale - copy config file
+      copy:
+        src: config/radicale/
+        dest: ~/.config/radicale/
+    # OPTONAL: automate startup of radicale, and perhaps shared alias with thunderbird
