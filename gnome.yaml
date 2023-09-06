@@ -2,26 +2,33 @@
   hosts: localhost
   connection: local
   tasks:
-    # install gnome tools
-    - name: apt - update
-      apt:
-        upgrade: no
-        update_cache: yes
-        cache_valid_time: 3600 # caching time: 1 hour
-      become: yes
     - name: apt - install gnome tools
       apt:
         name:
           - gnome-shell-extensions
           - gnome-tweaks
           - gnome-shell-extension-appindicator
-        state: latest
+        state: present
       become: yes
 
     # gnome settings
-    - name: gnome settings
-      shell: |
-        gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-        gsettings set org.gnome.desktop.interface enable-animations false
-        gsettings set org.gnome.shell.app-switcher current-workspace-only true
-        gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys true        
+    - name: dconf - 24h clock
+      community.general.dconf:
+        key: "/org/gnome/desktop/interface/clock-format"
+        value: "'24h'"
+    - name: dconf - color scheme perfer-dark
+      community.general.dconf:
+        key: "/org/gnome/desktop/interface/color-scheme"
+        value: "'prefer-dark'"
+    - name: dconf - disable animations
+      community.general.dconf:
+        key: "/org/gnome/desktop/interface/enable-animations"
+        value: "false"
+    - name: dconf - only apps from current workspace in app-switcher
+      community.general.dconf:
+        key: "/org/gnome/shell/app-switcher/current-workspace-only"
+        value: "true"
+    - name: dconf- launch and switch between dash items using Super+(0-9)
+      community.general.dconf:
+        key: "/org/gnome/shell/extensions/dash-to-dock/hot-keys"
+        value: "true"
