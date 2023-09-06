@@ -16,10 +16,6 @@
       community.general.dconf:
         key: "/org/gnome/desktop/interface/clock-format"
         value: "'24h'"
-    - name: dconf - color scheme perfer-dark
-      community.general.dconf:
-        key: "/org/gnome/desktop/interface/color-scheme"
-        value: "'prefer-dark'"
     - name: dconf - disable animations
       community.general.dconf:
         key: "/org/gnome/desktop/interface/enable-animations"
@@ -54,3 +50,17 @@
       community.general.dconf:
         key: "/org/gnome/dektop/wm/keybindings/switch-windows-backward"
         value: "['<Shift><Alt>Tab']"
+
+    # color theme
+    - name: dconf - color scheme perfer-dark
+      community.general.dconf:
+        key: "/org/gnome/desktop/interface/color-scheme"
+        value: "'prefer-dark'"
+    - name: dconf - no image in backround
+      community.general.dconf:
+        key: "/org/gnome/desktop/background/picture-uri-dark"
+        value: "''"
+    - name: dconf - background color
+      community.general.dconf:
+        key: "/org/gnome/desktop/background/primary-color"
+        value: "'#000000'"
