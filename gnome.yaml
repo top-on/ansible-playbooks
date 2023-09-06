@@ -64,3 +64,17 @@
       community.general.dconf:
         key: "/org/gnome/desktop/background/primary-color"
         value: "'#000000'"
+
+    # localization settings
+    - name: dconf - keyboard layout
+      community.general.dconf:
+        key: "/org/gnome/desktop/input-sources/sources"
+        value: "[('xkb', 'us+altgr-intl')]"
+    - name: dconf - capslock is escape
+      community.general.dconf:
+        key: "/org/gnome/desktop/input-sources/xkb-options"
+        value: "['caps:escape']"
+    - name: dconf - system locale
+      community.general.dconf:
+        key: "/org/gnome/system/locale/region"
+        value: "'de_AT.UTF-8'"
