@@ -22,7 +22,7 @@
       changed_when: false  # do not report as change
     - name: pyenv - install
       shell: curl https://pyenv.run | bash
-      when: which_pyenv.rc != 0  # run only if return code is not 0
+      when: which_pyenv.rc != 0  # run only if return code was not 0
     - name: pyenv - settings in .bashrc
       blockinfile: 
         path: ~/.bashrc
@@ -54,10 +54,15 @@
           - liblzma-dev
 
     # install poetry
+    - name: poetry - check if installed
+      command: which poetry
+      register: which_poetry
+      failed_when: false  # do not fail if does not exist
+      changed_when: false  # do not report as change
     # OPTIONAL: try installing with pipx instead
     - name: poetry - install
-      shell: |
-        which poetry || curl -sSL https://install.python-poetry.org | python3 -
+      shell: curl -sSL https://install.python-poetry.org | python3 -
+      when: which_poetry.rc != 0  # run only if return code was not 0
 
     # configure fish shell
     - name: fish - install
