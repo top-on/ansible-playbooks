@@ -22,7 +22,8 @@
         name:
           - us.zoom.Zoom
           - com.slack.Slack
-          - io.dbeaver.DBeaverCommunity
+          - com.jetbrains.DataGrip
+        state: present
 
     # chrome
     - name: chrome - add repository
