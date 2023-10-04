@@ -1,1 +1,2 @@
 browser "flatpak run com.brave.Browser %u"
+mark-as-read-on-hover yes
