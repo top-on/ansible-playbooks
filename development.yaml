@@ -13,6 +13,12 @@
           - docker-compose
           - snapd  # used to install vscode
 
+    # bash aliases
+    - name: bash - set aliases
+      lineinfile:
+        path: ~/.bashrc
+        line: "alias ..='cd ..'"
+
     # install pyenv (and python build dependencies)
     # OPTIONAL: use blockinfile module
     - name: pyenv - check if installed
