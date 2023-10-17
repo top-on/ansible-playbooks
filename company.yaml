@@ -36,3 +36,14 @@
       apt:
         name: google-chrome-stable
         state: present
+
+    # hamster time tracking
+    - name: hamster - install
+      become: yes
+      apt:
+        name: hamster-time-tracker
+        state: present
+    - name: hamster - set alias for working hours this week
+      lineinfile:
+        path: ~/.bashrc
+        line: "alias hours='hamster list $(date -d \"$(($(date +%u) - 1)) day ago\" +%Y-%m-%d) - $(date +%Y-%m-%d)'"
