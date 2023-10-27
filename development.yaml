@@ -69,6 +69,10 @@
     - name: poetry - install
       shell: curl -sSL https://install.python-poetry.org | python3 -
       when: which_poetry.rc != 0  # run only if return code was not 0
+    - name: poetry - add to path
+      lineinfile:
+        path: ~/.bashrc
+        line: export PATH="$HOME/.local/bin:$PATH"
 
     # configure fish shell
     - name: fish - install
