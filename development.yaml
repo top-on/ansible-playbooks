@@ -20,7 +20,6 @@
         line: "alias ..='cd ..'"
 
     # install pyenv (and python build dependencies)
-    # OPTIONAL: use blockinfile module
     - name: pyenv - check if installed
       command: which pyenv
       register: which_pyenv
