@@ -80,9 +80,10 @@
       apt:
         name: fish
     - name: fish - copy config file
-      copy:
-        src: config/fish/
-        dest: ~/.config/fish/
+      file:
+        src: "{{ playbook_dir }}/config/fish/config.fish"
+        dest: ~/.config/fish/config.fish
+        state: link
 
     # install vscode
     - name: vscode - install with snap

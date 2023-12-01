@@ -62,10 +62,18 @@
       apt:
         name: newsboat
         state: present
-    - name: newsboat - copy config files
-      copy:
-        src: config/newsboat/
-        dest: ~/.newsboat/
+    - name: newsboat - create symlink for config file
+      file:
+        src: "{{ playbook_dir }}/config/newsboat/config"
+        dest: ~/.newsboat/config
+        state: link
+        force: true
+    - name: newsboat - create symlink for urls file
+      file:
+        src: "{{ playbook_dir }}/config/newsboat/urls"
+        dest: ~/.newsboat/urls
+        state: link
+        force: true
     - name: cron - schedule newsboard reload
       ansible.builtin.cron:
         name: "schedule newsboat reload"
