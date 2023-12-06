@@ -49,7 +49,6 @@
           - io.gitlab.librewolf-community
           - com.jgraph.drawio.desktop
           - org.signal.Signal
-          - com.brave.Browser
           - com.microsoft.Edge
           - hu.irl.cameractrls # webcam settings
           - com.transmissionbt.Transmission
@@ -135,3 +134,19 @@
         name: syncthing
         state: present
 
+    # install brave from PPA
+    - name: brave - add release key
+      become: yes
+      apt_key:
+        id: D8BAD4DE7EE17AF52A834B2D0BB75829C2D4E821
+        url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+        keyring: /usr/share/keyrings/brave-browser-archive-keyring.gpg
+    - name: brave - add PPA
+      become: yes
+      apt_repository:
+        repo: deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
+    - name: brave - install
+      become: yes
+      apt:
+        name: brave-browser
+        state: present
