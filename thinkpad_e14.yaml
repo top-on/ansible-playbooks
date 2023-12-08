@@ -2,7 +2,7 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: "add sudo cronjob"
+    - name: "make FN keys work with cronjob"
       cron:
         name: "thinkpad-e14"
         job: "rtcwake -m mem -s 2"
