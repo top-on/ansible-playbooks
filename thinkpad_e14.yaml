@@ -1,0 +1,12 @@
+- name: "Hardware-specific configuration for Thinkpad E14."
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "add sudo cronjob"
+      cron:
+        name: "thinkpad-e14"
+        job: "rtcwake -m mem -s 2"
+        user: root
+        state: present
+        special_time: reboot
+      become: yes
