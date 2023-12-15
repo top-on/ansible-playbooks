@@ -13,12 +13,6 @@
           - docker-compose
           - snapd  # used to install vscode
 
-    # bash aliases
-    - name: bash - set aliases
-      lineinfile:
-        path: ~/.bashrc
-        line: "alias ..='cd ..'"
-
     # install pyenv (and python build dependencies)
     - name: pyenv - check if installed
       command: which pyenv
@@ -28,14 +22,6 @@
     - name: pyenv - install
       shell: curl https://pyenv.run | bash
       when: which_pyenv.rc != 0  # run only if return code was not 0
-    - name: pyenv - settings in .bashrc
-      blockinfile: 
-        path: ~/.bashrc
-        block: |
-          # pyenv configuration
-          export PYENV_ROOT="$HOME/.pyenv"
-          command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-          eval "$(pyenv init -)"
     - name: apt - install python build dependencies
       become: yes
       apt:
@@ -68,10 +54,6 @@
     - name: poetry - install
       shell: curl -sSL https://install.python-poetry.org | python3 -
       when: which_poetry.rc != 0  # run only if return code was not 0
-    - name: poetry - add to path
-      lineinfile:
-        path: ~/.bashrc
-        line: export PATH="$HOME/.local/bin:$PATH"
 
     # configure fish shell
     - name: fish - install

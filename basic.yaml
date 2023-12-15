@@ -26,6 +26,13 @@
           - gnome-shell-pomodoro
         state: present
 
+    - name: .bashrc - create symlink
+      file:
+        src: "{{ playbook_dir }}/config/.bashrc"
+        dest: ~/.bashrc
+        state: link
+        force: true
+
     # setup flatpak
     - name: flatpak - install dependencies
       become: yes
