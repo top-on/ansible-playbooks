@@ -18,21 +18,22 @@
         mullvad lan set allow
         mullvad dns set default --block-ads --block-gambling --block-malware --block-trackers
 
-    - name: ufw - deny all incoming
+    - name: firewall - deny all incoming
       ufw:
         rule: deny
-        direction: incoming
+        direction: in
         state: enabled
       become: yes
-    - name: ufw - deny all routing
-      ufw:
-        rule: deny
-        direction: routed
-        state: enabled
+
+    - name: bluetooth - disable with systemd (to use it, run 'sudo systemctl start bluetooth.service')
+      systemd:
+        name: bluetooth.service
+        state: stopped
+        enabled: false
       become: yes
-    - name: ufw - allow all outgoing
-      ufw:
-        rule: allow
-        direction: outgoing
-        state: enabled
-      become: yes
+    - name: wifi - turn off on startup/login
+      file:
+        src: "{{ playbook_dir }}/config/autostart/wifi-off.desktop"
+        dest: ~/.config/autostart/wifi-off.desktop
+        state: link
+        force: true

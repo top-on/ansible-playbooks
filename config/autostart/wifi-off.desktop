@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=nmcli r wifi off
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Turn wifi off
+Comment=turns off wifi on startup/login
+
