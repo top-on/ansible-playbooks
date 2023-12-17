@@ -7,7 +7,7 @@
       get_url:
         url: https://mullvad.net/download/app/deb/latest
         dest: /tmp/mullvad-latest.deb
-        checksum: sha256:16956bb88f343e6a41a3626b32f82f3a0ee8bba2dc7937a2b7d1db58a81c3dae
+        checksum: sha256:22113ddcd5d7f22c25beca3e7a2f706d5c8924bb648eb65ff2a078dc066b7bee
     - name: mullvad - install with apt
       apt:
         deb: /tmp/mullvad-latest.deb
