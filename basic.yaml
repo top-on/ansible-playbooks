@@ -82,7 +82,7 @@
         state: link
         force: true
     - name: cron - schedule newsboard reload
-      ansible.builtin.cron:
+      cron:
         name: "schedule newsboat reload"
         minute: "*/15"
         job: newsboat --execute=reload --log-level=1 --log-file=~/tmp/newsboat.log
