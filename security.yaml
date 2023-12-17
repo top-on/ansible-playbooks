@@ -17,3 +17,22 @@
         mullvad auto-connect set on
         mullvad lan set allow
         mullvad dns set default --block-ads --block-gambling --block-malware --block-trackers
+
+    - name: ufw - deny all incoming
+      ufw:
+        rule: deny
+        direction: incoming
+        state: enabled
+      become: yes
+    - name: ufw - deny all routing
+      ufw:
+        rule: deny
+        direction: routed
+        state: enabled
+      become: yes
+    - name: ufw - allow all outgoing
+      ufw:
+        rule: allow
+        direction: outgoing
+        state: enabled
+      become: yes
