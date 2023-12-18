@@ -43,7 +43,7 @@
       community.general.dconf:
         key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
         value: "true"
-    - name: dconf - mouse speed
+    - name: dconf - touchpad speed
       dconf:
         key: "/org/gnome/desktop/peripherals/touchpad/speed"
         value: 0.2
