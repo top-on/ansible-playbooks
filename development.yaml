@@ -67,6 +67,7 @@
         src: "{{ playbook_dir }}/config/fish/config.fish"
         dest: ~/.config/fish/config.fish
         state: link
+        force: true
 
     # install vscode
     - name: vscode - install with snap
