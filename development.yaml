@@ -13,7 +13,9 @@
           - snapd  # used to install vscode
     - name: podman-compose - install with pipx
       community.general.pipx:
-        name: podman-compose
+        name:
+          - podman-compose
+          - poetry
 
     # install pyenv (and python build dependencies)
     - name: pyenv - check if installed
@@ -45,17 +47,6 @@
           - libxmlsec1-dev
           - libffi-dev
           - liblzma-dev
-
-    # install poetry
-    - name: poetry - check if installed
-      command: which poetry
-      register: which_poetry
-      failed_when: false  # do not fail if does not exist
-      changed_when: false  # do not report as change
-    # OPTIONAL: try installing with pipx instead
-    - name: poetry - install
-      shell: curl -sSL https://install.python-poetry.org | python3 -
-      when: which_poetry.rc != 0  # run only if return code was not 0
 
     # configure fish shell
     - name: fish - install
