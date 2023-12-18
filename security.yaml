@@ -17,6 +17,16 @@
         mullvad auto-connect set on
         mullvad lan set allow
         mullvad dns set default --block-ads --block-gambling --block-malware --block-trackers
+    - name: mullvad - create autostart directory
+      file:
+        path: ~/.config/autostart
+        state: directory
+    - name: mullvad - symlink autostart file
+      file:
+        src: "{{ playbook_dir }}/config/autostart/mullvad.desktop"
+        dest: ~/.config/autostart/mullvad.desktop
+        state: link
+        force: true
 
     - name: firewall - deny all incoming
       ufw:

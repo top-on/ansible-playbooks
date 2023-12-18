@@ -136,11 +136,21 @@
       become: yes
       apt_repository:
         repo: deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable
-    - name: syncthing - install element desktop
+    - name: syncthing - install
       become: yes
       apt:
         name: syncthing
         state: present
+    - name: syncthing - create autostart directory
+      file:
+        path: ~/.config/autostart
+        state: directory
+    - name: syncthing - autostart
+      file:
+        src: "{{ playbook_dir }}/config/syncthing/syncthing.desktop"
+        dest: ~/.config/autostart/syncthing.desktop
+        state: link
+        force: true
 
     # install brave from PPA
     - name: brave - add release key
