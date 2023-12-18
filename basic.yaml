@@ -145,10 +145,10 @@
       file:
         path: ~/.config/autostart
         state: directory
-    - name: syncthing - autostart
+    - name: syncthing - symlink autostart file
       file:
-        src: "{{ playbook_dir }}/config/syncthing/syncthing.desktop"
-        dest: ~/.config/autostart/syncthing.desktop
+        src: "{{ playbook_dir }}/config/syncthing/syncthing-start.desktop"
+        dest: ~/.config/autostart/syncthing-start.desktop
         state: link
         force: true
 

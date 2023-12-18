@@ -23,8 +23,8 @@
         state: directory
     - name: mullvad - symlink autostart file
       file:
-        src: "{{ playbook_dir }}/config/autostart/mullvad.desktop"
-        dest: ~/.config/autostart/mullvad.desktop
+        src: "{{ playbook_dir }}/config/autostart/mullvad-vpn.desktop"
+        dest: ~/.config/autostart/mullvad-vpn.desktop
         state: link
         force: true
 
