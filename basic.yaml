@@ -69,6 +69,10 @@
       apt:
         name: newsboat
         state: present
+    - name: newsboat - create config dir
+      file:
+        path: ~/.newsboat/
+        state: directory
     - name: newsboat - create symlink for config file
       file:
         src: "{{ playbook_dir }}/config/newsboat/config"

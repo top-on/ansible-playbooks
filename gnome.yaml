@@ -8,6 +8,7 @@
           - gnome-shell-extensions
           - gnome-tweaks
           - gnome-shell-extension-appindicator
+          - dconf-editor
         state: present
       become: yes
 
@@ -37,7 +38,25 @@
         key: "/org/gnome/dektop/wm/keybindings/switch-windows-backward"
         value: "['<Shift><Alt>Tab']"
 
+    # input
+    - name: dconf - touchpad natural scolling
+      community.general.dconf:
+        key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
+        value: "true"
+    - name: dconf - touchpad speed
+      dconf:
+        key: "/org/gnome/desktop/peripherals/touchpad/speed"
+        value: 0.2
+    - name: dconf - mouse speed
+      dconf:
+        key: "/org/gnome/desktop/peripherals/mouse/speed"
+        value: 1
+
     # appearance
+    - name: dconf - auto-hide dock
+      community.general.dconf:
+        key: "/org/gnome/shell/extensions/dash-to-dock/dock-fixed"
+        value: "false"
     - name: dconf - disable animations
       community.general.dconf:
         key: "/org/gnome/desktop/interface/enable-animations"

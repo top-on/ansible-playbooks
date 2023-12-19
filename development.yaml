@@ -13,19 +13,19 @@
           - snapd  # used to install vscode
     - name: podman-compose - install with pipx
       community.general.pipx:
-        name:
-          - podman-compose
-          - poetry
+        name: podman-compose
+    - name: poetry - install with pipx
+      community.general.pipx:
+        name: poetry      
 
     # install pyenv (and python build dependencies)
-    - name: pyenv - check if installed
-      command: which pyenv
-      register: which_pyenv
-      failed_when: false  # do not fail if does not exist
-      changed_when: false  # do not report as change
+    - name: pyenv - check if folder ~/.pyenv exists
+      stat:
+          path: ~/.pyenv
+      register: pyenv_folder
     - name: pyenv - install
       shell: curl https://pyenv.run | bash
-      when: which_pyenv.rc != 0  # run only if return code was not 0
+      when: not pyenv_folder.stat.exists
     - name: apt - install python build dependencies
       become: yes
       apt:
@@ -53,6 +53,10 @@
       become: yes
       apt:
         name: fish
+    - name: fish - create config dir
+      file: 
+        path: ~/.config/fish/
+        state: directory
     - name: fish - copy config file
       file:
         src: "{{ playbook_dir }}/config/fish/config.fish"
