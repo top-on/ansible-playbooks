@@ -1,0 +1,18 @@
+- name: "Neovim setup"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: neovim - install
+      apt:
+        name: neovim
+      become: yes
+    - name: neovim - create config directory
+      file:
+        path: ~/.config/nvim
+        state: directory
+    - name: neovim - link config
+      file:
+        src: "{{ playbook_dir }}/config/neovim/init.vim"
+        dest: ~/.config/nvim/init.vim
+        state: link
+        force: true
