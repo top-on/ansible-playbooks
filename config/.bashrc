@@ -85,6 +85,9 @@ alias upgrade='sudo apt update && sudo apt upgrade && sudo apt autoremove && fla
 # alias for alerting when a command is finished
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# conditional nvim alias
+if [ -f /usr/bin/nvim ]; then alias vi=nvim; fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -104,3 +107,4 @@ eval "$(pyenv init -)"
 
 # poetry: add installation to path
 export PATH="$HOME/.local/bin:$PATH"
+
