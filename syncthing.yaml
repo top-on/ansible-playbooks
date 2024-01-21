@@ -1,0 +1,31 @@
+- name: "Setup syncthing."
+  hosts: localhost
+  connection: local
+  tasks:
+    # install syncthing from PPA
+    - name: syncthing - import release key
+      become: yes
+      apt_key:
+        id: 37C84554E7E0A261E4F76E1ED26E6ED000654A3E
+        url: https://syncthing.net/release-key.gpg
+        keyring: /usr/share/keyrings/syncthing-archive-keyring.gpg
+    - name: syncthing - add PPA
+      become: yes
+      apt_repository:
+        repo: deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable
+    - name: syncthing - install
+      become: yes
+      apt:
+        name: syncthing
+        state: present
+    - name: syncthing - create autostart directory
+      file:
+        path: ~/.config/autostart
+        state: directory
+    - name: syncthing - symlink autostart file
+      file:
+        src: "{{ playbook_dir }}/config/autostart/syncthing-start.desktop"
+        dest: ~/.config/autostart/syncthing-start.desktop
+        state: link
+        force: true
+
