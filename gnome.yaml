@@ -9,6 +9,7 @@
           - gnome-tweaks
           - gnome-shell-extension-appindicator
           - dconf-editor
+          - python3-psutil
         state: present
       become: yes
 
