@@ -55,12 +55,9 @@
           - com.github.tchx84.Flatseal # flatpak rights management
           - io.gitlab.librewolf-community
           - com.github.micahflee.torbrowser-launcher
-          - com.jgraph.drawio.desktop
           - org.signal.Signal
-          - com.microsoft.Edge
           - hu.irl.cameractrls # webcam settings
           - com.transmissionbt.Transmission
-          - com.spotify.Client
         state: present
 
     # install and configure newsboat RSS reader
