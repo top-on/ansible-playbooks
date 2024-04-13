@@ -62,10 +62,10 @@
       community.general.dconf:
         key: "/org/gnome/desktop/interface/enable-animations"
         value: "false"
-    - name: dconf - no title bars
+    - name: dconf - show title bars
       community.general.dconf:
         key: "/org/gnome/shell/extensions/pop-shell/show-title"
-        value: "false"
+        value: "true"
     - name: dconf - color scheme perfer-dark
       community.general.dconf:
         key: "/org/gnome/desktop/interface/color-scheme"
