@@ -74,6 +74,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+    alias jup='cd ~/git/joplin && git add . && git commit -a -m "commit all"; git push'
+    alias jdown='cd ~/git/joplin && git pull'
 fi
 
 # ALIASES

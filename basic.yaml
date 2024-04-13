@@ -56,6 +56,7 @@
           - org.torproject.torbrowser-launcher
           - org.signal.Signal
           - com.transmissionbt.Transmission
+          - net.cozic.joplin_desktop
         state: present
 
     # install and configure newsboat RSS reader
