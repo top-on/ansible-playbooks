@@ -53,10 +53,8 @@
         name:
           - org.keepassxc.KeePassXC
           - com.github.tchx84.Flatseal # flatpak rights management
-          - io.gitlab.librewolf-community
-          - com.github.micahflee.torbrowser-launcher
+          - org.torproject.torbrowser-launcher
           - org.signal.Signal
-          - hu.irl.cameractrls # webcam settings
           - com.transmissionbt.Transmission
         state: present
 
