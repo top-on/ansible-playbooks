@@ -84,6 +84,7 @@ alias ..='cd ..'
 alias upgrade='sudo apt update && sudo apt upgrade && sudo apt autoremove && flatpak update'
 # alias for alerting when a command is finished
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias noise='play -n synth 60:00 whitenoise'
 
 # conditional nvim alias
 if [ -f /usr/bin/nvim ]; then alias v=nvim; fi
