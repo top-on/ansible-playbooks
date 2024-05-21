@@ -7,7 +7,7 @@
       get_url:
         url: https://mullvad.net/download/app/deb/latest
         dest: /tmp/mullvad-latest.deb
-        checksum: sha256:22113ddcd5d7f22c25beca3e7a2f706d5c8924bb648eb65ff2a078dc066b7bee
+        checksum: sha256:2dfb8b05818795511c5691d275148011ff43ed00a145dfdf871f04a020596d27
     - name: mullvad - install with apt
       apt:
         deb: /tmp/mullvad-latest.deb
@@ -35,12 +35,6 @@
         state: enabled
       become: yes
 
-    - name: bluetooth - disable with systemd (to use it, run 'sudo systemctl start bluetooth.service')
-      systemd:
-        name: bluetooth.service
-        state: stopped
-        enabled: false
-      become: yes
     - name: create autostart dir
       file:
         path: ~/.config/autostart/
