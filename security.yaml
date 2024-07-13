@@ -35,13 +35,3 @@
         state: enabled
       become: yes
 
-    - name: create autostart dir
-      file:
-        path: ~/.config/autostart/
-        state: directory
-    - name: wifi - turn off on startup/login
-      file:
-        src: "{{ playbook_dir }}/config/autostart/wifi-off.desktop"
-        dest: ~/.config/autostart/wifi-off.desktop
-        state: link
-        force: true
